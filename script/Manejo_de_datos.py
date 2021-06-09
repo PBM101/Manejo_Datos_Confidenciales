@@ -20,3 +20,18 @@ def lectura_nombre_columnas(url=None, num=-1):
         route = input("Introduzca la url desde dónde desea extraer los datos: ")
     else:
         route = url
+    
+    columnas = pd.read_csv(route, sep=";", header=None,
+                           dayfirst=True, infer_datetime_format=True, nrows=1)
+
+    # Escritura de archivos txt
+    if num < 0:
+        title = "Columnas.txt"
+    else:
+        number = str(num)
+        title = "Columnas" + number + ".txt"
+
+    with open(title, "w+") as file1:
+        for i in range(len(columnas.columns)):
+            file1.write(columnas[i][0])
+            file1.write(',')
