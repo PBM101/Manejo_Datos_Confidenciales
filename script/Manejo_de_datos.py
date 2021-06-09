@@ -4,3 +4,6 @@
     Tema: Manejo de Datos
 
 """
+
+def lectura_nombre_columnas(url=None, num=-1):
+    
