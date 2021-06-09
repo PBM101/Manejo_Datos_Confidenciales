@@ -36,18 +36,3 @@ def lectura_nombre_columnas(url=None, num=-1):
         for i in range(len(columnas.columns)):
             file1.write(columnas[i][0])
             file1.write(',')
-
-"""
-def lectura_headers_archivos(lista):
-    import sys  # comprobación de librerías adecuadas
-    modulename = 'pd'
-    if modulename not in sys.modules:
-        import pandas as pd
-
-    i = 1
-    while i <= len(lista):
-        lectura_nombre_columnas(url=lista[i - 1][0], num=i)
-        i += 1
-    print('Fin de creación de archivos')
-
-"""
