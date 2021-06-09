@@ -6,11 +6,14 @@ def Menu():
     :return: A list of strings with the routes to the files
     """
     route = []
-    route[0] = input('Introduzca la dirección del archivo: ')
+    route.append(input(str('Introduzca la dirección del archivo: '))) # Input inicial de rutas
 
-    while(route != 'Done'):
+    i = 0 # Contador de posición
+
+    while (route[i] != 'Done'):
         print('Si quieres terminar el proceso escribe "Done"\n')
-        route.append(input('Introduzca la dirección del archivo: '))
+        route.append(str(input('Introduzca la dirección del archivo: ')))
+        i = i + 1
 
     return route
 
