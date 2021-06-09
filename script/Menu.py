@@ -5,12 +5,19 @@ def Menu():
     The Menu() function asks for a route and stores it in a string variable.
     :return: A list of strings with the routes to the files
     """
+    messageDone = 'Si quiere terminar el proceso escribe "Done"\n'
+    messageRoute = 'Introduzca la dirección del archivo: '
+
     route = []
-    route[0] = input('Introduzca la dirección del archivo: ')
+    print(messageDone)
+    command = input(messageRoute)
+    if command.upper() != 'DONE':
+        while command.upper() != 'DONE':
+            route.append(command)
+            command = input(messageRoute)
 
-    while(route != 'Done'):
-        print('Si quieres terminar el proceso escribe "Done"\n')
-        route.append(input('Introduzca la dirección del archivo: '))
+    print("Proceso terminado")
 
-    return route
+    print(route)
+
 
