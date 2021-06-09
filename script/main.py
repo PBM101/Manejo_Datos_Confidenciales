@@ -6,3 +6,7 @@
     
 '''
 
+from Menu import Menu
+
+route = Menu()
+
