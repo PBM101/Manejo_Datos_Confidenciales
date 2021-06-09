@@ -1,5 +1,11 @@
 # Funcionalidad relacionada con el menú
 
+"""
+    Autores: Nicolás Olabarría
+    Fecha: 9 de Junio de 2021
+    Tema: Menú
+"""
+
 def Menu():
     """
     The Menu() function asks for a route and stores it in a string variable.
@@ -24,5 +30,6 @@ def Menu():
     print("Proceso terminado")
     
     return route
+
 
 
