@@ -9,6 +9,8 @@ def Menu():
     route[0] = input('Introduzca la dirección del archivo: ')
 
     while(route != 'Done'):
+        print('Si quieres terminar el proceso escribe "Done"\n')
         route.append(input('Introduzca la dirección del archivo: '))
 
     return route
+
