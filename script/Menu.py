@@ -13,23 +13,67 @@ def Menu():
     """
     
     # Mensajes utilizados en el menú
+    messageOption = '¿Cómo quiere leer las direcciones de los datasets?[man/txt]: '
+    messageNotValid = 'Opción no válida. Introdúzcalo de nuevo\n'
+
+
+    print(
+        'Puedes introducir los datos manualmente (man), o si los tienes en un .txt hacerlo de manera automática (txt)')
+    option = input(messageOption)
+
+    while option.upper() != 'MAN' and option.upper() != 'TXT':
+        print(messageNotValid)
+        option = input(messageOption)
+
+    route = []
+
+    if option.upper() == 'MAN':
+        route = LecturaManual()
+    elif option.upper() == 'TXT':
+        route = LecturaTXT()
+
+    return route
+
+def LecturaManual():
+    """
+    Lectura de las rutas de manera manual.
+    :return: Devuelve una lista de rutas introducidas de manera manual.
+    """
     messageDone = 'Si quiere terminar el proceso escribe "Done"\n'
     messageRoute = 'Introduzca la dirección del archivo: '
-    
-    # Declaración de la variable de lista de rutas 
-    route = []
-    
     print(messageDone)
     command = input(messageRoute)
-    
+
+    route = []
+
     if command.upper() != 'DONE':
         while command.upper() != 'DONE':
             route.append(command)
             command = input(messageRoute)
 
-    print("Proceso terminado")
-    
     return route
+
+def LecturaTXT():
+    """
+    Función para la lectura de las rutas de manera automática.
+    :return: Devuelve una lista de rutas sacadas de un archivo .txt.
+    """
+    txt_route = input('Introduzca la ruta del archivo: ')
+    while True:
+        try:
+            route_file = open(txt_route, 'r')
+            break
+        except FileNotFoundError:
+            txt_route = input('La ruta no es válida, introdúzcala de nuevo: ')
+    print(route_file.read())
+
+    route = []
+
+    for line in route_file:
+        route.append(line)
+
+    return route
+
 
 
 

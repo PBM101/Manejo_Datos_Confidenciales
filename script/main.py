@@ -7,6 +7,13 @@
 
 
 import Menu
+import Manejo_de_datos
 
+# Lectura de direcciones de los archivos
 route = Menu.Menu()
 
+# Lectura de las columnas de cada ruta
+i = 1
+for url in route:
+    Manejo_de_datos.lectura_nombre_columnas(url, i)
+    i = i +1
