@@ -31,5 +31,12 @@ def Menu():
     
     return route
 
+def LecturaManual():
+
+
+def LecturaTXT():
+
+    
+
 
 
