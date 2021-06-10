@@ -56,7 +56,6 @@ def lectura_nombre_columnas(url, num=-1):
                 file1.write(columnas[i][0])
                 file1.write(',')
 
-
 def headers_varios_archivos(lista):
     """
     Función genérica que recibe una lista de urls y crea sistemáticamente archivos para cada uno de las urls
@@ -71,3 +70,17 @@ def headers_varios_archivos(lista):
     for i in range(len(lista)):
         lectura_nombre_columnas(lista[i], i)
     print('Fin de creación de archivos')
+
+def eliminar_headers_originales(url=None):
+    """
+    Función que se encarga de eliminar los archivos con las columnas originales de los archivos
+    :param: url: String con la dirección de memoria dónde deben estar almacenados los archivos con las columnas. En caso
+                de que no se de una url, se tomará la url del directorio.
+    :return: Nullo.
+    """
+    if url==None:
+        from os import path
+        route = path.dirname(path.abspath(__file__))
+    else:
+        route = url
+    print("Se eliminarán los archivos columna en: ", route)
