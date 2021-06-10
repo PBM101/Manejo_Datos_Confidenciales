@@ -49,8 +49,6 @@ def headers_varios_archivos(lista):
     if modulename not in sys.modules:
         import pandas as pd
 
-    i = 1
-    while i <= len(lista):
-        lectura_nombre_columnas(url=lista[i - 1][0], num=i)
-        i += 1
+    for i in range(len(lista)):
+        lectura_nombre_columnas(lista[i], i)
     print('Fin de creación de archivos')
