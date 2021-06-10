@@ -6,6 +6,8 @@
     Tema: Menú
 """
 
+import pandas as pd
+
 def Menu():
     """
     The Menu() function asks for a route and stores it in a string variable.
@@ -48,6 +50,15 @@ def LecturaManual():
 
     if command.upper() != 'DONE':
         while command.upper() != 'DONE':
+
+            while True:
+                try:
+                    data = pd.read_csv(command)
+                    break
+                except FileNotFoundError:
+                    print('La dirección no es correcta')
+                    command = input(messageRoute)
+
             route.append(command)
             command = input(messageRoute)
 
@@ -61,16 +72,16 @@ def LecturaTXT():
     txt_route = input('Introduzca la ruta del archivo: ')
     while True:
         try:
-            route_file = open(txt_route, 'r')
+            with open(txt_route, 'r') as route_file:
+                route = []
+                i = 1
+                for line in route_file.readlines():
+                    print('Ruta ', i, ':', line)
+                    i+=1
+                    route.append(line)
             break
         except FileNotFoundError:
             txt_route = input('La ruta no es válida, introdúzcala de nuevo: ')
-    print(route_file.read())
-
-    route = []
-
-    for line in route_file:
-        route.append(line)
 
     return route
 
