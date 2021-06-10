@@ -6,7 +6,7 @@
 """
 
 
-from Menu import Menu
+import Menu
 
-route = Menu()
+route = Menu.Menu()
 
