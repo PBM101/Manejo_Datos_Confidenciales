@@ -14,7 +14,7 @@ def lectura_nombre_columnas(url, num=-1):
     :param url: String con la dirección de memoria del archivo a obtener headers.
            num: Número de documento en dónde almacenar los datos tal que: columnas'num'.txt, en caso de ser negativo el archivo
             tendrá nombre Columnas.txt .
-    :return: Nullo
+    :return: Nulo
     """
     import sys
     module_name = "pd"
@@ -44,32 +44,36 @@ def lectura_nombre_columnas(url, num=-1):
         if option.upper() == "YES":
             from os import remove
             remove(route)
-            try:
-                with open(title, "w+") as file1:
-                    for i in range(len(columnas.columns)):
-                        file1.write(columnas[i][0])
-                        file1.write(',')
-            except UnicodeEncodeError:
-                print(
-                    "El archivo que se ha querido almacenar no cumple con las especificaciones para su correcta lectura."
-                    "\nSe procederá a salir sin almacenar los datos")
+            escritura(title, columnas, route)
         else:
             print("Las columnas del archivo no serán almacenadas en el archivo con nombre: ", title)
     else:
-        try:
-            with open(title, "w+") as file1:
-                for i in range(len(columnas.columns)):
-                    file1.write(columnas[i][0])
-                    file1.write(',')
-        except UnicodeEncodeError:
-            print("El archivo que se ha querido almacenar no cumple con las especificaciones para su correcta lectura."
-                  "\nSe procederá a salir sin almacenar los datos")
+        escritura(title, columnas, route)
+
+def escritura(title, columnas, route):
+    """
+    Escritura de lista en un archivo de texto.
+    :param title: Nombre del archivo dónde se almacenarán las columnas del csv leído.
+           columnas: Lista de columnas a almacenar en el archivo.
+           route: ruta del archivo para eliminar en caso de error.
+    :return: Nulo
+    """
+    try:
+        with open(title, "w+") as file1:
+            for i in range(len(columnas.columns)):
+                file1.write(columnas[i][0])
+                file1.write(',')
+    except UnicodeEncodeError:
+        print("El archivo que se ha querido almacenar no cumple con las especificaciones para su correcta lectura."
+              "\nSe procederá a salir sin almacenar los datos.")
+        from os import remove
+        remove(route)
 
 def headers_varios_archivos(lista):
     """
     Función genérica que recibe una lista de urls y crea sistemáticamente archivos para cada uno de las urls
     :param lista: Lista de rutas a varios archivos de los que se quiere obtener headers.
-    :return: Nullo.
+    :return: Nulo.
     """
     import sys  # comprobación de librerías adecuadas
     modulename = 'pd'
