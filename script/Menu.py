@@ -79,7 +79,6 @@ def LecturaTXT():
                     print('Ruta ', i, ':', line)
                     i+=1
                     line = line.replace("\n", "")
-                    print(line)
                     route.append(line)
             break
         except FileNotFoundError:
