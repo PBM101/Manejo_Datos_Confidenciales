@@ -8,6 +8,7 @@
 
 import Menu
 import Manejo_de_datos
+import CambiosNombres
 
 # Lectura de direcciones de los archivos
 route = Menu.Menu()
@@ -17,3 +18,8 @@ i = 1
 for url in route:
     Manejo_de_datos.lectura_nombre_columnas(url, i)
     i = i +1
+
+url = []
+
+for url in route:
+    CambiosNombres.cambios_nombres(url)
