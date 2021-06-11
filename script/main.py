@@ -21,5 +21,7 @@ for url in route:
 
 url = []
 
+dataFrames = []
+
 for url in route:
-    CambiosNombres.cambios_nombres(url)
+    dataFrames.append(CambiosNombres.cambios_nombres(url))

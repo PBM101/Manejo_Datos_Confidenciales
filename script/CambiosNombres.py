@@ -2,6 +2,12 @@ import pandas as pd
 
 def cambios_nombres(url):
 
+    """
+    Función para cambiar los nombres de los dataFrames a utilizar
+    :param url: necesita la dirección de los dataFrames a utilizar
+    :return: devuelve un dataFrame
+    """
+
     dataFrame = pd.read_csv(url)
     print("Vas a cambiar los nombres de las columnas del data Frame de la dirección:\n", url)
 
@@ -15,6 +21,7 @@ def cambios_nombres(url):
 
     print(dataFrame.columns)
 
-    return
+    return dataFrame
+
 
 
