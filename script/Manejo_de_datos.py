@@ -17,8 +17,8 @@ def lectura_nombre_columnas(url, num=-1):
     :return: Nullo
     """
     import sys
-    modulename = "pd"
-    if modulename not in sys.modules:
+    module_name = "pd"
+    if module_name not in sys.modules:
         import pandas as pd
 
     columnas = pd.read_csv(url, sep=";", header=None,
@@ -31,7 +31,7 @@ def lectura_nombre_columnas(url, num=-1):
         number = str(num)
         title = "Columnas" + number + ".txt"
 
-    #Comprobación de ruta vacía
+    # Comprobación de ruta vacía
     from os import path
     print("Los archivos actuales se almacenarán en: ", path.dirname(path.abspath(__file__)))
     route = path.dirname(path.abspath(__file__)) + r'\\' + title
@@ -44,17 +44,26 @@ def lectura_nombre_columnas(url, num=-1):
         if option.upper() == "YES":
             from os import remove
             remove(route)
+            try:
+                with open(title, "w+") as file1:
+                    for i in range(len(columnas.columns)):
+                        file1.write(columnas[i][0])
+                        file1.write(',')
+            except UnicodeEncodeError:
+                print(
+                    "El archivo que se ha querido almacenar no cumple con las especificaciones para su correcta lectura."
+                    "\nSe procederá a salir sin almacenar los datos")
+        else:
+            print("Las columnas del archivo no serán almacenadas en el archivo con nombre: ", title)
+    else:
+        try:
             with open(title, "w+") as file1:
                 for i in range(len(columnas.columns)):
                     file1.write(columnas[i][0])
                     file1.write(',')
-        else:
-            print("Las columnas del archivo no serán almacenadas en el archivo con nombre: ", title)
-    else:
-        with open(title, "w+") as file1:
-            for i in range(len(columnas.columns)):
-                file1.write(columnas[i][0])
-                file1.write(',')
+        except UnicodeEncodeError:
+            print("El archivo que se ha querido almacenar no cumple con las especificaciones para su correcta lectura."
+                  "\nSe procederá a salir sin almacenar los datos")
 
 def headers_varios_archivos(lista):
     """
