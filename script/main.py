@@ -19,9 +19,10 @@ for url in route:
     Manejo_de_datos.lectura_nombre_columnas(url, i)
     i = i +1
 
-url = []
 
 dataFrames = []
 
 for url in route:
     dataFrames.append(CambiosNombres.cambios_nombres(url))
+
+for url in route

@@ -1,5 +1,7 @@
 import pandas as pd
 
+i = 0
+
 def cambios_nombres(url):
 
     """
@@ -23,5 +25,10 @@ def cambios_nombres(url):
 
     return dataFrame
 
+def nombres_originales(url, dataFrame, title):
+
+    with open(title, "r") as name_file:
+
+    return dataFrame
 
 
