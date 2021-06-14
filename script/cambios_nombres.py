@@ -99,10 +99,10 @@ def nombres_originales(dataFrame, title):
         while os.path.exists(new_variables_route) == False:
             print("La ruta seleccionada no existe, inténtelo de nuevo.\n")
             new_variables_route = input("Introduzca el nombre de la ruta: ")
-        title = input("¿Cómo quiere llamar al archivo?: ")
-        with open(title, 'w') as file:
+        title_new = input("¿Cómo quiere llamar al archivo?: ")
+        with open(title_new + '.txt', 'w+') as file:
             for i in range(0, len(dataFrame.columns)):
-                file.writelines(dataFrame.columns[i],'\n')
+                file.writelines(dataFrame.columns[i] + '\n')
 
     with open(title, 'r') as name_file:
         name_list = name_file.readlines()
