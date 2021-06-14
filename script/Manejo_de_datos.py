@@ -94,7 +94,6 @@ def eliminar_headers_originales(route):
     print(type(route))
     import os
     import re
-    print("Se eliminarán los archivos columna en: ", route)
 
     contenido = os.listdir(route)
     archivos = []
@@ -102,32 +101,44 @@ def eliminar_headers_originales(route):
         if os.path.isfile(os.path.join(route, fichero)) and fichero.endswith('.txt') \
                 and bool(re.search(r"Columnas", fichero)):
             archivos.append(fichero)
-    print("Actualmente el directorio ", route, " tiene los siguientes archivos:")
-    ar = {}
-    for i in range(len(archivos)):
-        ar[str(i)] = archivos[i]
-        print(i, ")", archivos[i])
-    print("\n¿Qué archivos desea eliminar? Escriba ALL si quiere eliminar todos los archivos mostrados "
-          "o DONE cuando haya escrito todos los números asociados a los archivos que desea eliminar")
+    confir=False
+    while confir is False:
+        print("Actualmente el directorio ", route, " tiene los siguientes archivos:")
+        ar = {}
+        for i in range(len(archivos)):
+            ar[str(i)] = archivos[i]
+            print(i, ")", archivos[i])
+        print("\n¿Qué archivos desea eliminar? Escriba ALL si quiere eliminar todos los archivos mostrados "
+              "o DONE cuando haya escrito todos los números asociados a los archivos que desea eliminar")
 
-    sele = []
-    while True:
-        punt = input("- ")
-        if punt in ar:
-            if punt not in sele:
-                sele.append(punt)
+        sele = []
+        while True:
+            punt = input("- ")
+            if punt in ar:
+                if punt not in sele:
+                    sele.append(punt)
+                else:
+                    print('Este archivo ya se seleccionó anteriormente')
+            elif punt.upper() == 'ALL':
+                print('Todos los archivos serán seleccionados')
+                sele.clear()
+                sele.extend(ar.keys())
+                break
+            elif punt.upper() == 'DONE':
+                break
             else:
-                print('Este archivo ya se seleccionó anteriormente')
-        elif punt.upper() == 'ALL':
-            print('Todos los archivos serán seleccionados')
-            sele.clear()
-            sele.extend(ar.keys())
-            break
-        elif punt.upper() == 'DONE':
-            break
-        else:
-            print('Opción no valida, introdúzcalo de nuevo')
-    cs = sorted(sele)
-    print('Los archivos en las siguientes URLs serán eliminadas:')
-    for y in range(len(cs)):
-        print(ar[cs[y]])
+                print('Opción no valida, introdúzcalo de nuevo')
+        cs = sorted(sele)
+        print('Estás seguro que desea eliminar los siguientes archivos:')
+        for y in range(len(cs)):
+            print(ar[cs[y]])
+        while True:
+            decision = input("[YES/NO] ")
+            if decision.upper() == 'YES' or decision.upper() == 'NO':
+                break
+            print(messageNotValid)
+        if decision.upper() == 'YES':
+            confir = True
+    for q in range(len(cs)):
+        url = route + '/' + ar[cs[q]]
+        os.remove(url)
