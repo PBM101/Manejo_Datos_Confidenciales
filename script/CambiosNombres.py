@@ -25,10 +25,18 @@ def cambios_nombres(url):
 
     return dataFrame
 
-def nombres_originales(url, dataFrame, title):
+def nombres_originales(dataFrame, title):
 
     with open(title, "r") as name_file:
+        name_list = name_file.readlines()
+        name_list = name_list[0].split(',')
+        name_list = list(filter(lambda item: item.strip(), name_list))
 
+        for i in range(0, len(dataFrame.columns)):
+            dict = {dataFrame.columns[i] : name_list[i]}
+            dataFrame.rename(columns = dict, inplace = True)
+
+    print(dataFrame)
     return dataFrame
 
 
