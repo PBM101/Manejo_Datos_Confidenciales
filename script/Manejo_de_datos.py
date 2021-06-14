@@ -91,7 +91,6 @@ def eliminar_headers_originales(route):
                 de que no se de una url, se tomará la url del directorio.
     :return: Nulo.
     """
-    print(type(route))
     import os
     import re
 
@@ -142,3 +141,23 @@ def eliminar_headers_originales(route):
     for q in range(len(cs)):
         url = route + '/' + ar[cs[q]]
         os.remove(url)
+
+def lista_archivos(route,nombre):
+    """
+    Función que busca en un directorio específico todos los archivos .txt que contengan un nombre específico.
+    :param route:Directorio dónde se desea buscar los archivos.
+           nombre: Principio del nombre del archivo que desea encontrar, Si desea encontrar las urls de los archivos
+           {Columnas1,Columnas2,Columnas3} el nombre introducido será 'Columnas'.
+    :return: Devuelve una lista con las URLs correspondientes a la localización de los archivos que contengan 'nombre'.
+    """
+    import os
+    import re
+
+    contenido = os.listdir(route)
+    archivos = []
+    for fichero in contenido:
+        if os.path.isfile(os.path.join(route, fichero)) and fichero.endswith('.txt') \
+                and bool(re.search(nombre, fichero)):
+            elemento = route + '/' + fichero
+            archivos.append(elemento)
+    return archivos
