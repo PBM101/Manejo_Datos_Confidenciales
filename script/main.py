@@ -5,12 +5,12 @@
 
 """
 
-import Menu
+import menu
 import Manejo_de_datos
-import CambiosNombres
+import cambios_nombres
 
 # Lectura de direcciones de los archivos
-route = Menu.Menu()
+route = menu.menu()
 
 # Lectura de las columnas de cada ruta
 i = 1
@@ -22,10 +22,10 @@ for url in route:
 dataFrames = []
 
 for url in route:
-    dataFrames.append(CambiosNombres.cambios_nombres(url))
+    dataFrames.append(cambios_nombres.cambios_nombres(url))
 
 # Aquí deberían ir las rutas de los archivos
 title = []
 
 for dataFrame in dataFrames:
-    CambiosNombres.nombres_originales(dataFrame,title)
+    cambios_nombres.nombres_originales(dataFrame,title)

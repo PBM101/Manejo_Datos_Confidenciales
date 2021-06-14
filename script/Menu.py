@@ -8,43 +8,43 @@
 
 import pandas as pd
 
-def Menu():
+def menu():
     """
-    The Menu() function asks for a route and stores it in a string variable.
+    The menu() function asks for a route and stores it in a string variable.
     :return: A list of strings with the routes to the files
     """
     
     # Mensajes utilizados en el menú
-    messageOption = '¿Cómo quiere leer las direcciones de los datasets?[man/txt]: '
-    messageNotValid = 'Opción no válida. Introdúzcalo de nuevo\n'
+    message_option = '¿Cómo quiere leer las direcciones de los datasets?[man/txt]: '
+    message_not_valid = 'Opción no válida. Introdúzcalo de nuevo\n'
 
 
     print(
         'Puedes introducir los datos manualmente (man), o si los tienes en un .txt hacerlo de manera automática (txt)')
-    option = input(messageOption)
+    option = input(message_option)
 
     while option.upper() != 'MAN' and option.upper() != 'TXT':
-        print(messageNotValid)
-        option = input(messageOption)
+        print(message_not_valid)
+        option = input(message_option)
 
     route = []
 
     if option.upper() == 'MAN':
-        route = LecturaManual()
+        route = lectura_manual()
     elif option.upper() == 'TXT':
-        route = LecturaTXT()
+        route = lectura_txt()
 
     return route
 
-def LecturaManual():
+def lectura_manual():
     """
     Lectura de las rutas de manera manual.
     :return: Devuelve una lista de rutas introducidas de manera manual.
     """
-    messageDone = 'Si quiere terminar el proceso escribe "Done"\n'
-    messageRoute = 'Introduzca la dirección del archivo: '
-    print(messageDone)
-    command = input(messageRoute)
+    message_done = 'Si quiere terminar el proceso escribe "Done"\n'
+    message_route = 'Introduzca la dirección del archivo: '
+    print(message_done)
+    command = input(message_route)
 
     route = []
 
@@ -57,14 +57,14 @@ def LecturaManual():
                     break
                 except FileNotFoundError:
                     print('La dirección no es correcta')
-                    command = input(messageRoute)
+                    command = input(message_route)
 
             route.append(command)
-            command = input(messageRoute)
+            command = input(message_route)
 
     return route
 
-def LecturaTXT():
+def lectura_txt():
     """
     Función para la lectura de las rutas de manera automática.
     :return: Devuelve una lista de rutas sacadas de un archivo .txt.
