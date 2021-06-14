@@ -42,6 +42,11 @@ def cambios_nombres(url):
 
 def variables_guardadas():
 
+    """
+    Función para leer los nombres de las variables a las que se quieren cambiar las columnas del dataFrame
+    :return:Devuelve una lista con los nombres de las variables nuevas.
+    """
+
     variable_route = input("Introduzca la ruta del directorio donde tiene guardadas las variables: ")
     while os.path.exists(variable_route) == False:
         variable_route = input("La ruta no existe, introdúzcala de nuevo: ")
@@ -95,5 +100,3 @@ def nombres_originales(dataFrame, title):
 
     print(dataFrame)
     return dataFrame
-
-
