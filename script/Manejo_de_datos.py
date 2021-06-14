@@ -84,16 +84,50 @@ def headers_varios_archivos(lista):
         lectura_nombre_columnas(lista[i], i)
     print('Fin de creación de archivos')
 
-def eliminar_headers_originales(url=None):
+def eliminar_headers_originales(route):
     """
     Función que se encarga de eliminar los archivos con las columnas originales de los archivos
     :param: url: String con la dirección de memoria dónde deben estar almacenados los archivos con las columnas. En caso
                 de que no se de una url, se tomará la url del directorio.
-    :return: Nullo.
+    :return: Nulo.
     """
-    if url==None:
-        from os import path
-        route = path.dirname(path.abspath(__file__))
-    else:
-        route = url
+    print(type(route))
+    import os
+    import re
     print("Se eliminarán los archivos columna en: ", route)
+
+    contenido = os.listdir(route)
+    archivos = []
+    for fichero in contenido:
+        if os.path.isfile(os.path.join(route, fichero)) and fichero.endswith('.txt') \
+                and bool(re.search(r"Columnas", fichero)):
+            archivos.append(fichero)
+    print("Actualmente el directorio ", route, " tiene los siguientes archivos:")
+    ar = {}
+    for i in range(len(archivos)):
+        ar[str(i)] = archivos[i]
+        print(i, ")", archivos[i])
+    print("\n¿Qué archivos desea eliminar? Escriba ALL si quiere eliminar todos los archivos mostrados "
+          "o DONE cuando haya escrito todos los números asociados a los archivos que desea eliminar")
+
+    sele = []
+    while True:
+        punt = input("- ")
+        if punt in ar:
+            if punt not in sele:
+                sele.append(punt)
+            else:
+                print('Este archivo ya se seleccionó anteriormente')
+        elif punt.upper() == 'ALL':
+            print('Todos los archivos serán seleccionados')
+            sele.clear()
+            sele.extend(ar.keys())
+            break
+        elif punt.upper() == 'DONE':
+            break
+        else:
+            print('Opción no valida, introdúzcalo de nuevo')
+    cs = sorted(sele)
+    print('Los archivos en las siguientes URLs serán eliminadas:')
+    for y in range(len(cs)):
+        print(ar[cs[y]])
