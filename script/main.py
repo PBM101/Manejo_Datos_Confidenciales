@@ -25,7 +25,7 @@ for url in route:
     dataFrames.append(cambios_nombres.cambios_nombres(url))
 
 # Aquí deberían ir las rutas de los archivos
-title = []
+title = 'Columnas1.txt'
 
 for dataFrame in dataFrames:
     cambios_nombres.nombres_originales(dataFrame,title)

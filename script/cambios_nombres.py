@@ -89,6 +89,21 @@ def nombres_originales(dataFrame, title):
     :return: devuelve el dataFrame con los nombres de las variables originales.
     """
 
+    option = input("¿Quiere guardar los nombres de sus variables para usarlos en un futuro? [yes/no]:")
+    while option.upper() != 'YES' and option.upper() != 'NO':
+        print("La opción elegida no es válida, inténtelo de nuevo.")
+        option = input("¿Quiere guardar los nombres de sus variables para usarlos en un futuro? [yes/no]:")
+
+    if option.upper() == 'YES':
+        new_variables_route = input("Introduzca el nombre de la ruta: ")
+        while os.path.exists(new_variables_route) == False:
+            print("La ruta seleccionada no existe, inténtelo de nuevo.\n")
+            new_variables_route = input("Introduzca el nombre de la ruta: ")
+        title_new = input("¿Cómo quiere llamar al archivo?: ")
+        with open(title_new + '.txt', 'w+') as file:
+            for i in range(0, len(dataFrame.columns)):
+                file.writelines(dataFrame.columns[i] + '\n')
+
     with open(title, 'r') as name_file:
         name_list = name_file.readlines()
         name_list = name_list[0].split(',')
