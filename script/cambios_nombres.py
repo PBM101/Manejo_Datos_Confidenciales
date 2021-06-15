@@ -18,14 +18,14 @@ def cambios_nombres(url):
         print("La opción introducida no es válida, intentalo de nuevo.")
         option = input("¿Tienes las variables guardadas o prefieres introducirlas de manera manual?[txt/man]: ")
 
-    dict = {}
+    dict = {} # Diccionario utilizado para el cambio de nombre de las variables. 
 
     if option.upper() == 'MAN':
         for index in range(0, len(dataFrame.columns)):
-            print(type(dataFrame.columns[index]))
+            print("¿Qué nombre quieres darle a la variable", dataFrame.columns[index], "?")
             new_title = input("Introduzca el nuevo nombre: ")
             dict = {dataFrame.columns[index]: new_title}
-            print(new_title)
+            print(" El nuevo nombre es:", new_title)
             dataFrame.rename(columns=dict, inplace=True)
             index += 1
     elif option.upper() == 'TXT':
@@ -36,7 +36,8 @@ def cambios_nombres(url):
             i += 1
         print(dict)
         dataFrame.rename(columns = dict, inplace = True)
-    print(dataFrame.columns)
+
+    print("Las columnas del dataFrame quedan de la siguiente manera: ", dataFrame.columns)
 
     return dataFrame
 
@@ -59,7 +60,7 @@ def variables_guardadas():
         try:
             option = int(input("Introduzca el número del archivo donde tiene guardadas las variables: "))
             while option > len(files) + 1 or option == 0:
-                option = int(input("Esa opción no es válida, inténtalo de nuevo, mamón: "))
+                option = int(input("Esa opción no es válida, inténtalo de nuevo: "))
             print("El archivo que quiere abrir es: ", files[option - 1])
             try:
                 with open(files[option - 1], 'r') as variable_file:
@@ -70,7 +71,6 @@ def variables_guardadas():
             except OSError:
                 option= int(input("Ese archivo no se puede leer. Introduzca otra opcion:"))
                 break
-            break
         except ValueError:
             option = int(input("Esa opción no es válida, inténtalo de nuevo: "))
 
