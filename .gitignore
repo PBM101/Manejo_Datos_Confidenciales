@@ -122,3 +122,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+*.txt
+
+*.idea
+
+script/Variables
+
