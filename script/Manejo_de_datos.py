@@ -5,6 +5,10 @@
 
 """
 
+import pandas as pd
+import os
+import re
+
 messageOption = '¿Quieres sobreescribir este archivo?[yes/no]: '
 messageNotValid = 'Opción no válida. Introdúzcalo de nuevo\n'
 
@@ -16,10 +20,6 @@ def lectura_nombre_columnas(url, num=-1):
             tendrá nombre Columnas.txt .
     :return: Nulo
     """
-    import sys
-    module_name = "pd"
-    if module_name not in sys.modules:
-        import pandas as pd
 
     columnas = pd.read_csv(url, sep=";", header=None,
                            dayfirst=True, infer_datetime_format=True, nrows=1)
@@ -32,18 +32,16 @@ def lectura_nombre_columnas(url, num=-1):
         title = "Columnas" + number + ".txt"
 
     # Comprobación de ruta vacía
-    from os import path
-    print("Los archivos actuales se almacenarán en: ", path.dirname(path.abspath(__file__)))
-    route = path.dirname(path.abspath(__file__)) + r'\\' + title
-    if path.exists(route):
+    print("Los archivos actuales se almacenarán en: ", os.path.dirname(os.path.abspath(__file__)))
+    route = os.path.dirname(os.path.abspath(__file__)) + r'\\' + title
+    if os.path.exists(route):
         print("La ruta señalada está ya en uso.\n")
         option = input(messageOption)
         while option.upper() != 'YES' and option.upper() != 'NO':
             print(messageNotValid)
             option = input(messageOption)
         if option.upper() == "YES":
-            from os import remove
-            remove(route)
+            os.remove(route)
             escritura(title, columnas, route)
         else:
             print("Las columnas del archivo no serán almacenadas en el archivo con nombre: ", title)
@@ -66,8 +64,7 @@ def escritura(title, columnas, route):
     except UnicodeEncodeError:
         print("El archivo que se ha querido almacenar no cumple con las especificaciones para su correcta lectura."
               "\nSe procederá a salir sin almacenar los datos.")
-        from os import remove
-        remove(route)
+        os.remove(route)
 
 def headers_varios_archivos(lista):
     """
@@ -75,10 +72,6 @@ def headers_varios_archivos(lista):
     :param lista: Lista de rutas a varios archivos de los que se quiere obtener headers.
     :return: Nulo.
     """
-    import sys  # comprobación de librerías adecuadas
-    modulename = 'pd'
-    if modulename not in sys.modules:
-        import pandas as pd
 
     for i in range(len(lista)):
         lectura_nombre_columnas(lista[i], i)
@@ -91,8 +84,6 @@ def eliminar_headers_originales(route):
                 de que no se de una url, se tomará la url del directorio.
     :return: Nulo.
     """
-    import os
-    import re
 
     contenido = os.listdir(route)
     archivos = []
@@ -150,8 +141,6 @@ def lista_archivos(route,nombre):
            {Columnas1,Columnas2,Columnas3} el nombre introducido será 'Columnas'.
     :return: Devuelve una lista con las URLs correspondientes a la localización de los archivos que contengan 'nombre'.
     """
-    import os
-    import re
 
     contenido = os.listdir(route)
     archivos = []

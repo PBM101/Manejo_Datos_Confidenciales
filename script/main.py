@@ -5,12 +5,12 @@
 
 """
 
-import menu
+import Menu
 import Manejo_de_datos
 import cambios_nombres
 
 # Lectura de direcciones de los archivos
-route = menu.menu()
+route = Menu.menu()
 
 # Lectura de las columnas de cada ruta
 i = 1

@@ -54,7 +54,7 @@ def variables_guardadas():
 
     files = os.listdir(variable_route)
     for i in range(1, len(files) + 1):
-        print(i,'.', files[i - 1])
+        print(i, '.', files[i - 1])
 
     while True:
         try:
@@ -69,7 +69,7 @@ def variables_guardadas():
                         variable_list.append(lines)
                     break
             except OSError:
-                option= int(input("Ese archivo no se puede leer. Introduzca otra opcion:"))
+                option = int(input("Ese archivo no se puede leer. Introduzca otra opcion:"))
                 break
         except ValueError:
             option = int(input("Esa opción no es válida, inténtalo de nuevo: "))
