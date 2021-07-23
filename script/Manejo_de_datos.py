@@ -21,6 +21,7 @@ def lectura_nombre_columnas(url, num=-1):
     :return: Nulo
     """
 
+    #Lectura de columnas
     columnas = pd.read_csv(url, sep=";", header=None,
                            dayfirst=True, infer_datetime_format=True, nrows=1)
 
@@ -50,7 +51,7 @@ def lectura_nombre_columnas(url, num=-1):
 
 def escritura(title, columnas, route):
     """
-    Escritura de lista en un archivo de texto.
+    Escritura de lista en un archivo de texto creado.
     :param title: Nombre del archivo dónde se almacenarán las columnas del csv leído.
            columnas: Lista de columnas a almacenar en el archivo.
            route: ruta del archivo para eliminar en caso de error.
@@ -80,17 +81,22 @@ def headers_varios_archivos(lista):
 def eliminar_headers_originales(route):
     """
     Función que se encarga de eliminar los archivos con las columnas originales de los archivos
-    :param: url: String con la dirección de memoria dónde deben estar almacenados los archivos con las columnas. En caso
-                de que no se de una url, se tomará la url del directorio.
+    :param: url: String con la dirección de memoria dónde deben estar almacenados los archivos con las columnas (Con
+        nombre Columnas ... ). En caso de que no se de una url, se tomará la url del directorio.
     :return: Nulo.
     """
 
+    #Lectura de archivos en la ruta indicada
     contenido = os.listdir(route)
+
+    #Almacenamiento de archivos específicos que tengan en su nombre la palabra 'Columnas'
     archivos = []
     for fichero in contenido:
         if os.path.isfile(os.path.join(route, fichero)) and fichero.endswith('.txt') \
                 and bool(re.search(r"Columnas", fichero)):
             archivos.append(fichero)
+
+    #Selección de archivos a eliminar
     confir=False
     while confir is False:
         print("Actualmente el directorio ", route, " tiene los siguientes archivos:")
@@ -100,7 +106,6 @@ def eliminar_headers_originales(route):
             print(i, ")", archivos[i])
         print("\n¿Qué archivos desea eliminar? Escriba ALL si quiere eliminar todos los archivos mostrados "
               "o DONE cuando haya escrito todos los números asociados a los archivos que desea eliminar")
-
         sele = []
         while True:
             punt = input("- ")
@@ -119,6 +124,8 @@ def eliminar_headers_originales(route):
             else:
                 print('Opción no valida, introdúzcalo de nuevo')
         cs = sorted(sele)
+
+        #Confirmación final
         print('Estás seguro que desea eliminar los siguientes archivos:')
         for y in range(len(cs)):
             print(ar[cs[y]])
@@ -129,6 +136,8 @@ def eliminar_headers_originales(route):
             print(messageNotValid)
         if decision.upper() == 'YES':
             confir = True
+
+    #Eliminación de archivos
     for q in range(len(cs)):
         url = route + '/' + ar[cs[q]]
         os.remove(url)

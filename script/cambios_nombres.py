@@ -1,3 +1,10 @@
+"""
+    Autor: Nicolás Olabarría
+    Fecha: 9 de Junio de 2021
+    Tema: Manejo de nombres de headers
+
+"""
+
 import pandas as pd
 import os
 
